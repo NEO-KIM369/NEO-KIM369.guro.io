@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="scroll.css">
+  <title>Scroll Test</title>
+  <style>
+  	.empty{
+  width: 100%;
+  height: 2000px;
+  background-color:pink;
+}
+
+.bottom{
+  width: 100%;
+  height: 2000px;
+  background-color:pink;
+}
+
+.string{
+  font-size: 40px;
+  opacity: 0;
+  transform: translateX(40px);
+  transition: 1s;
+}
+
+.string-active{
+  opacity: 1;
+  transform: translateX(0px);
+}
+  </style>
+  <script>
+  	function activateString(){
+    //get string element
+    const words = document.querySelector('.string')
+
+    //get window height
+    var windowHeight = window.innerHeight / 1.2;
+    var elementHeight = words.getBoundingClientRect().top;
+
+    //check windowHeight reaches element Height
+    if (elementHeight < windowHeight){
+        words.classList.add('string-active')
+    }
+
+}
+
+function toBottom(){
+    var bottomHeight = document.querySelector('.bottom').getBoundingClientRect().top;
+    window.scrollTo(0, bottomHeight)
+    console.log("bottom" + bottomHeight)
+}
+
+window.addEventListener('scroll', activateString)
+document.querySelector('.nav-to-bottom').addEventListener('click', toBottom)
+  </script>
+</head>
+<body>
+  <button class="nav-to-bottom">to Bottom</button>
+  <div class="empty">
+    empty box for spacing
+  </div>
+  <div class="string">String to be appear</div>
+  <div class="bottom">
+    empty box for spacing
+  </div>
+  <script src="scroll.js"></script>
+</body>
+</html>
